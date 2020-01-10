@@ -10,19 +10,36 @@ class Chronometer {
     }, 1000)
   }
   getMinutes() {
+    let timeClone = this.currentTime;
     let minutes = 0;
-    for (; this.currentTime >= 60;) {
+    for (; timeClone >= 60;) {
       minutes ++;
-      this.currentTime = this.currentTime - 60;
+      timeClone = timeClone - 60;
     }
     return minutes;
   }
   getSeconds() {
-    let seconds = this.currentTime;
-    return seconds;
+    let timeClone = this.currentTime;
+    for (; timeClone >= 60;) {
+      timeClone = timeClone - 60;
+    }
+    return timeClone;
   }
-  // twoDigitsNumber() {}
-  // stopClick() {}
-  // resetClick() {}
+  twoDigitsNumber(time) {
+    let timeDigits = (""+time).split("");
+
+    if (timeDigits.length === 1) {
+      timeDigits.unshift('0')
+    }
+
+    return timeDigits.join('');
+  }  
+  stopClick() {
+    this.intervalId = clearInterval();
+  }
+  resetClick() {
+    this.currentTime = 0;
+    this.intervalId = clearInterval();
+  }
   // splitClick() {}
 }
