@@ -3,10 +3,11 @@ class Chronometer {
     this.currentTime = 0;
     this.intervalId;
   }
-  startClick() {
+  startClick(func) {
     this.intervalId = setInterval(() => {
       this.currentTime ++;
-
+      console.log(this.currentTime)
+      func();
     }, 1000)
   }
   getMinutes() {
@@ -32,10 +33,10 @@ class Chronometer {
       timeDigits.unshift('0')
     }
 
-    return timeDigits.join('');
+    return timeDigits;
   }  
   stopClick() {
-    this.intervalId = clearInterval();
+    this.intervalId = clearInterval(this.intervalId);
   }
   resetClick() {
     this.currentTime = 0;
